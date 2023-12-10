@@ -29,16 +29,16 @@ def game_loop():
         active_creature = random.choice(creatures)
 
         print('A {} of level {} has appear from a dark and foggy forest...'
-              .format(active_creature.name, active_creature.level))
+              .format(active_creature._name, active_creature.level))
         print()
 
         cmd = input('Do you [a]ttack, [r]unaway, or [l]ook around? ')
         if cmd == 'a':
             if hero.attack(active_creature):
                 creatures.remove(active_creature)
-                print("The wizard defeated {}".format(active_creature.name))
+                print("The wizard defeated {}".format(active_creature._name))
             else:
-                print("The wizard has been defeat by the powerful {}".format(active_creature.name))
+                print("The wizard has been defeat by the powerful {}".format(active_creature._name))
         elif cmd == 'r':
             print('The wizard has become unsure of his power and flees!!!')
         elif cmd == 'l':
