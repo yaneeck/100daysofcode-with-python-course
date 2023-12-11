@@ -1,4 +1,5 @@
 import random
+from typing import Union
 
 
 class Roll:
@@ -22,8 +23,11 @@ class Roll:
         return {
             "rock": {"defeats": "scissors", "defeated by": "paper"},
             "paper": {"defeats": "rock", "defeated by": "scissors"},
-            "scissors": {"defeats": "rock", "defeated by": "rock"}
+            "scissors": {"defeats": "paper", "defeated by": "rock"}
         }
 
-    def defeats(self, choice: str) -> bool:
+    def defeats(self, choice: str) -> Union[bool, None]:
+        if self._name == choice:
+            return None
         return Roll.rules()[self._name]["defeats"] == choice
+

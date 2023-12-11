@@ -10,9 +10,8 @@ def get_players_name():
     return input("What is your name? ")
 
 
-def game_loop(player1, player2):
-    count = 1
-    while count < 3:
+def game_loop(player1, player2, rolls: int = 3) -> None:
+    for _ in range(rolls):
         p1_roll = Roll(input("Choose a roll: paper, rock, or scissors "))
         p2_roll = Roll()
 
@@ -31,8 +30,6 @@ def game_loop(player1, player2):
         else:
             print(f"{player2.name} wins!")
             player2.score += 1  # added score update when player wins
-
-        count += 1
 
     # Compute who won
     if player1.score > player2.score:
