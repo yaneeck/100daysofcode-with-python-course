@@ -12,7 +12,7 @@ def get_players_name():
 
 def game_loop(player1, player2, rolls: int = 3) -> None:
     for _ in range(rolls):
-        p1_roll = Roll(input("Choose a roll: paper, rock, or scissors "))
+        p1_roll = Roll(input(f"Choose a roll ({", ".join(Roll.options())}): "))
         p2_roll = Roll()
 
         outcome = p1_roll.defeats(p2_roll.name)

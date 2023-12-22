@@ -8,7 +8,7 @@ class Roll:
         if choice:
             self._name = choice
         else:
-            self._name = Roll.options()[random.randint(0, 2)]
+            self._name = Roll.options()[random.randint(0, 14)]
 
     @property
     def name(self) -> str:
@@ -16,18 +16,35 @@ class Roll:
 
     @staticmethod
     def options() -> list:
-        return ["rock", "paper", "scissors"]
+        return [
+            "rock", "gun", "lightning",
+            "devil", "dragon", "water",
+            "air", "paper", "sponge",
+            "wolf", "tree", "human",
+            "snake", "scissors", "fire"
+        ]
 
     @staticmethod
-    def rules() -> dict:
+    def wins() -> dict:
         return {
-            "rock": {"defeats": "scissors", "defeated by": "paper"},
-            "paper": {"defeats": "rock", "defeated by": "scissors"},
-            "scissors": {"defeats": "paper", "defeated by": "rock"}
+            "rock": ["sponge", "wolf", "tree", "human", "snake" "scissors", "fire"],
+            "gun": ["rock", "wolf", "tree", "human", "snake", "scissors", "fire"],
+            "lightning": ["rock", "gun", "tree", "human", "snake", "scissors", "fire"],
+            "devil": ["rock", "gun", "lightning", "human", "snake", "scissors", "fire"],
+            "dragon": ["rock", "gun", "lightning", "snake", "scissors", "fire"],
+            "water": ["rock", "gun", "lightning", "devil", "dragon", "scissors", "fire"],
+            "air": ["rock", "gun", "lightning", "devil", "dragon", "water", "fire"],
+            "paper": ["rock", "gun", "lightning", "devil", "dragon", "water", "air"],
+            "sponge": ["gun", "lightning", "devil", "dragon", "water", "air", "paper"],
+            "wolf": ["lightning", "devil", "dragon", "water", "air", "paper", "sponge"],
+            "tree": ["devil", "dragon", "water", "air", "paper", "sponge", "wolf"],
+            "human": ["dragon", "water", "air", "paper", "sponge", "wolf", "tree"],
+            "snake": ["water", "air", "paper", "sponge", "wolf", "tree", "human"],
+            "scissors": ["air", "paper", "sponge", "wolf", "tree", "human", "snake"],
+            "fire": ["paper", "sponge", "wolf", "tree", "human", "snake", "scissors"]
         }
 
     def defeats(self, choice: str) -> Union[bool, None]:
         if self._name == choice:
             return None
-        return Roll.rules()[self._name]["defeats"] == choice
-
+        return choice in Roll.wins()[self._name]
